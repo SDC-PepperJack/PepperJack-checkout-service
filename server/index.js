@@ -27,6 +27,18 @@ app.get('/api/checkout/:productId/details', (req, res) => {
     });
 });
 
+app.post('/api/checkout/:productId/details', (req, res) => {
+  const { productId } = req.params;
+  const {sellerId, sellerName, averageReviewScore, numberReviews, itemName, badge, itemPrice, freeShipping, productOptions, personalization, availableQuantity, onOrder } = req.body;
+  console.log(productId);
+  Model.insertProduct(productId, sellerId, sellerName, averageReviewScore, numberReviews, itemName, badge, itemPrice, freeShipping, productOptions, personalization, availableQuantity, onOrder, (err, results) => {
+    if (err) {
+      console.log('Error adding', err);
+    } else {
+      res.send('Successful addition of new product');
+    }
+  });
+});
 
 app.delete('/api/checkout/:productId/details', (req, res) => {
   const { productId } = req.params;
