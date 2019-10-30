@@ -21,11 +21,22 @@ class ProductDetailsModel {
       } else {
         cb(null, result);
       }
-    })
-  }
+    });
+  };
 
-  deleteProduct(productId, cb) {
-    this.model.findOneAndRemove({'productId': productId}, (err, result) => {
+  updateProduct(inputId, updateDetail, cb) {
+
+    this.model.findOneAndUpdate({productId: inputId}, updateDetail, (err, result) => {
+      if (err) {
+        cb(err, null);
+      } else {
+        cb(null, result);
+      }
+    });
+  };
+
+  deleteProduct(inputId, cb) {
+    this.model.findOneAndRemove({'productId': inputId}, (err, result) => {
       if (err) {
         cb(err, null);
       } else {

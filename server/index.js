@@ -30,7 +30,7 @@ app.get('/api/checkout/:productId/details', (req, res) => {
 app.post('/api/checkout/:productId/details', (req, res) => {
   const { productId } = req.params;
   const {sellerId, sellerName, averageReviewScore, numberReviews, itemName, badge, itemPrice, freeShipping, productOptions, personalization, availableQuantity, onOrder } = req.body;
-  console.log(productId);
+
   Model.insertProduct(productId, sellerId, sellerName, averageReviewScore, numberReviews, itemName, badge, itemPrice, freeShipping, productOptions, personalization, availableQuantity, onOrder, (err, results) => {
     if (err) {
       console.log('Error adding', err);
@@ -51,6 +51,18 @@ app.delete('/api/checkout/:productId/details', (req, res) => {
   });
 });
 
+app.put('/api/checkout/:productId/details', (req, res) => {
+  const { productId } = req.params;
+  const updateDetail = req.body;
+
+  Model.updateProduct(productId, updateDetail, (err, results) => {
+    if (err) {
+      console.log('Error updating');
+    } else {
+      res.send('Successful update');
+    }
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`Listening at port ${PORT}`);
