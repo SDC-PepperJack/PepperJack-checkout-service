@@ -13,6 +13,16 @@ class ProductDetailsModel {
     }
     return productData;
   }
+
+  deleteProduct(productId, cb) {
+    this.model.findOneAndRemove({'productId': productId}, (err, result) => {
+      if (err) {
+        cb(err, null);
+      } else {
+        cb(null, result);
+      }
+    });
+  };
 }
 
 
