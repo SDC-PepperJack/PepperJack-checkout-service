@@ -27,6 +27,19 @@ app.get('/api/checkout/:productId/details', (req, res) => {
     });
 });
 
+
+app.delete('/api/checkout/:productId/details', (req, res) => {
+  const { productId } = req.params;
+  Model.deleteProduct(productId, (err, results) => {
+    if (err) {
+      console.log('Error deleting');
+    } else {
+      res.send('Successful deletion');
+    }
+  });
+});
+
+
 app.listen(PORT, () => {
   console.log(`Listening at port ${PORT}`);
 });
