@@ -33,20 +33,10 @@ app.post('/api/checkout/:productId/details', (req, res) => {
 
   Model.insertProduct(productId, sellerId, sellerName, averageReviewScore, numberReviews, itemName, badge, itemPrice, freeShipping, productOptions, personalization, availableQuantity, onOrder, (err, results) => {
     if (err) {
-      console.log('Error adding', err);
+      res.status(404);
+      res.send('Error adding new product');
     } else {
       res.send('Successful addition of new product');
-    }
-  });
-});
-
-app.delete('/api/checkout/:productId/details', (req, res) => {
-  const { productId } = req.params;
-  Model.deleteProduct(productId, (err, results) => {
-    if (err) {
-      console.log('Error deleting');
-    } else {
-      res.send('Successful deletion');
     }
   });
 });
@@ -57,12 +47,26 @@ app.put('/api/checkout/:productId/details', (req, res) => {
 
   Model.updateProduct(productId, updateDetail, (err, results) => {
     if (err) {
-      console.log('Error updating');
+      res.status(404);
+      res.send('Error updating product');
     } else {
-      res.send('Successful update');
+      res.send(results);
     }
   });
 });
+
+app.delete('/api/checkout/:productId/details', (req, res) => {
+  const { productId } = req.params;
+  Model.deleteProduct(productId, (err, results) => {
+    if (err) {
+      res.status(404);
+      res.send('Error deleting product');
+    } else {
+      res.send('Successful deletion');
+    }
+  });
+});
+
 
 app.listen(PORT, () => {
   console.log(`Listening at port ${PORT}`);

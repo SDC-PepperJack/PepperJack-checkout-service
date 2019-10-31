@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/BTetsy', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost/BTetsy', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 
 const productDetailsSchema = new mongoose.Schema({
   productId: { type: Number, index: { unique: true } },
