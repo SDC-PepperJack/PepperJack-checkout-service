@@ -4,10 +4,9 @@
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+- https://github.com/SDC-PepperJack/Pepperjack-carousel-darjama
+- https://github.com/SDC-PepperJack/pepperjack-item-details
+- https://github.com/SDC-PepperJack/Pepperjack-reviews-service
 
 ## Table of Contents
 
