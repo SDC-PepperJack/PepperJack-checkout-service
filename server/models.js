@@ -15,18 +15,24 @@ class ProductDetailsModel {
   }
 
   insertProduct(productId, sellerId, sellerName, averageReviewScore, numberReviews, itemName, badge, itemPrice, freeShipping, productOptions, personalization, availableQuantity, onOrder, cb) {
-    this.model.create({sellerId, sellerName, averageReviewScore, numberReviews, itemName, badge, itemPrice, freeShipping, productOptions, personalization, availableQuantity, onOrder, productId}, (err, result) => {
-      if (err) {
-        cb(err, null);
-      } else {
-        cb(null, result);
-      }
-    });
+    if (!this.model.findOne({productId})) {
+      this.model.create({sellerId, sellerName, averageReviewScore, numberReviews, itemName, badge, itemPrice, freeShipping, productOptions, personalization, availableQuantity, onOrder, productId}, (err, result) => {
+        if (err) {
+          cb(err, null);
+        } else {
+          cb(null, result);
+        }
+      });
+    } else {
+      let err = 'Product already in database';
+      cb(err, null);
+    }
   };
 
   updateProduct(inputId, updateDetail, cb) {
-
-    this.model.findOneAndUpdate({productId: inputId}, updateDetail, (err, result) => {
+    // switch from findOneAndUpdate to updateOne to save some time
+      // because findOneAndUpdate returns a document, while updateOne just returns the id
+    this.model.updateOne({productId: inputId}, updateDetail, (err, result) => {
       if (err) {
         cb(err, null);
       } else {
@@ -36,13 +42,18 @@ class ProductDetailsModel {
   };
 
   deleteProduct(inputId, cb) {
-    this.model.findOneAndRemove({'productId': inputId}, (err, result) => {
-      if (err) {
-        cb(err, null);
-      } else {
-        cb(null, result);
-      }
-    });
+    if (this.model.findOne({productId: inputId})) {
+      this.model.deleteOne({productId: inputId}, (err, result) => {
+        if (err) {
+          cb(err, null);
+        } else {
+          cb(null, result);
+        }
+      });
+    } else {
+      let err = 'Product does not exist';
+      cb(err, null);
+    }
   };
 }
 
