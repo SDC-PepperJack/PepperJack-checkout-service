@@ -52,13 +52,13 @@ describe('API Routes', () => {
     expect(response.status).toBe(200);
   });
 
-  // test('A put request to /api/checkout/:productId/details should return a success message', async() => {
-  //   try {
-  //     var response = await axios.put('http://127.0.0.1:1234/api/checkout/10/details');
-  //   } catch (err) {
-  //     var response = err;
-  //   }
-  //   expect(response.status).toBe(200);
-  // });
+  test('A put request to /api/checkout/:productId/details should return a success message', async() => {
+    try {
+      var response = await axios.put('http://127.0.0.1:1234/api/checkout/10/details');
+    } catch (err) {
+      var response = err;
+    }
+    expect(response.status).toBe(200);
+  });
 
 });
