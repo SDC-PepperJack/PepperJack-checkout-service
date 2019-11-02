@@ -1,11 +1,12 @@
 const faker = require('faker');
+// const createCsvWriter = require('csv-writer').createArrayCsvWriter; // doesn't append but works
 const createCsvWriter = require('csv-writer').createArrayCsvWriter;
 const csvWriter = createCsvWriter({
   header: ['productId', 'sellerId', 'sellerName', 'averageReviewScore', 'numberReviews', 'itemName', 'badge', 'itemPrice', 'freeShipping', 'productOptions', 'personalization', 'availableQuantity', 'onOrder'],
-  path: './generateData.csv'
+  path: './data3.csv',
+  append: true,
 });
 
-let productId = faker.random.number(); // must be unique
 let sellerId = faker.random.number();
 let sellerName = faker.name.firstName();
 let averageReviewScore = faker.random.number();
@@ -19,12 +20,17 @@ let personalization = faker.random.boolean();
 let availableQuantity = faker.random.number();
 let onOrder = faker.random.number();
 
-const records = [
-  [productId, sellerId, sellerName, averageReviewScore, numberReviews, itemName, badge, itemPrice, freeShipping, productOptions, personalization, availableQuantity, onOrder]
-];
 
-csvWriter.writeRecords(records)
-  .then(() => {
-    console.log('...Done');
-  });
+const csvConverter = (n) => {
+    for (var i = 230414; i < n; i++) {
+      let productId = i; // must be unique
 
+      const records = [
+        [productId, sellerId, sellerName, averageReviewScore, numberReviews, itemName, badge, itemPrice, freeShipping, productOptions, personalization, availableQuantity, onOrder]
+      ];
+
+      csvWriter.writeRecords(records);
+    }
+}
+
+csvConverter(250000);
