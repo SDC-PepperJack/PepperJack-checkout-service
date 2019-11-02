@@ -29,3 +29,8 @@ dist/
 .eslintrc.json
 aws-keys.json
 
+# csvFiles
+data.csv
+data2.csv
+data3.csv
+data4.csv

@@ -12,7 +12,7 @@ client.connect()
   .then(() => {
     client.query(`CREATE TABLE productDetails (
       productId BIGSERIAL PRIMARY KEY,
-      sellerId BIGINT UNIQUE,
+      sellerId BIGINT,
       sellerName VARCHAR(50),
       averageReviewScore BIGINT,
       numberReviews BIGINT,
