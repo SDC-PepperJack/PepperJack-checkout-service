@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node server/index.js",
     "build": "webpack",
-    "seed-db": "node db/seed.js",
+    "seed-db": "node --max_old_space_size=8192 pgDb/createCsv.js",
     "start-dev": "nodemon server/index.js --watch",
     "test": "jest"
   },

@@ -30,7 +30,4 @@ dist/
 aws-keys.json
 
 # csvFiles
-data.csv
-data2.csv
-data3.csv
-data4.csv
+pgDb/generatedData/productDetail.csv
