@@ -21,7 +21,10 @@ function writeProducts(writer, encoding, callback) {
       let badge = faker.lorem.word();
       let itemPrice = faker.random.number();
       let freeShipping = faker.random.boolean();
-      let productOptions = faker.random.word();
+      let optionName = faker.random.word();
+      let choice = faker.random.word();
+      let productOptions = JSON.stringify({ optionName, choice });
+      // let productOptions = faker.random.word();
       let personalization = faker.random.boolean();
       let availableQuantity = faker.random.number();
       let onOrder = faker.random.number();
