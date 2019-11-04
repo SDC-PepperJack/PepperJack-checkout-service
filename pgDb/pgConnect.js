@@ -20,7 +20,7 @@ client.connect()
       badge VARCHAR(50),
       itemPrice DECIMAL,
       freeShipping BOOLEAN,
-      productOptions VARCHAR(50),
+      productOptions text ARRAY[2],
       personalization BOOLEAN,
       availableQuantity BIGINT,
       onOrder INT
