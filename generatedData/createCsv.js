@@ -19,7 +19,7 @@ function writeProducts(writer, encoding, callback) {
       let numberReviews = faker.random.number();
       let itemName = faker.lorem.word();
       let badge = faker.lorem.word();
-      let itemPrice = faker.random.number();
+      let itemPrice = faker.finance.amount(5, 1000, 2);
       let freeShipping = faker.random.boolean();
       let optionName = faker.random.word();
       let choice = faker.random.word();
