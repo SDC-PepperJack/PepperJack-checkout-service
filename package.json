@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node server/index.js",
     "build": "webpack",
-    "seed-db": "node --max_old_space_size=12288 generatedData/createCsv.js",
+    "seed-db": "node --max_old_space_size=12288 csv/createCsv.js",
     "start-dev": "nodemon server/index.js --watch",
     "test": "jest"
   },
@@ -27,6 +27,7 @@
     "mongoose": "^5.7.7",
     "morgan": "^1.9.1",
     "pg": "^7.12.1",
+    "pg-copy-streams": "^2.2.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-star-rating-component": "^1.4.1"

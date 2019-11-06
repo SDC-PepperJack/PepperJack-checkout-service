@@ -5,7 +5,9 @@ const client = new cassandra.Client({ contactPoints: ['127.0.0.1'], localDataCen
 client.connect()
   .then(() => {
     console.log('Successful connection');
-    client.execute(`CREATE TABLE testing (
+  })
+  .then(() => {
+    client.execute(`CREATE TABLE productdetails (
       productId BIGINT PRIMARY KEY,
       sellerId BIGINT,
       sellerName TEXT,
@@ -15,7 +17,7 @@ client.connect()
       badge TEXT,
       itemPrice DECIMAL,
       freeShipping BOOLEAN,
-      productOptions map<text, text>,
+      productOptions text,
       personalization BOOLEAN,
       availableQuantity BIGINT,
       onOrder INT

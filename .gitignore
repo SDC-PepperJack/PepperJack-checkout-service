@@ -30,4 +30,5 @@ dist/
 aws-keys.json
 
 # csvFiles
-generatedData/productDetail.csv
+pgDb/csvFile/productDetail.csv
+cassandraDb/csvFile/productDetail.csv
