@@ -10,7 +10,7 @@ const client = new Pool({
 client.connect()
   .then(() => console.log('connected!'))
   .then(() => {
-    client.query(`CREATE TABLE productDetails (
+    client.query(`CREATE TABLE productdetails (
       productId BIGSERIAL PRIMARY KEY,
       sellerId BIGINT,
       sellerName VARCHAR(50),
@@ -20,10 +20,9 @@ client.connect()
       badge VARCHAR(50),
       itemPrice DECIMAL,
       freeShipping BOOLEAN,
-      productOptions text ARRAY[2],
+      productOptions text,
       personalization BOOLEAN,
       availableQuantity BIGINT,
       onOrder INT
     )`);
   });
-
