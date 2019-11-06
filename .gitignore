@@ -31,4 +31,5 @@ aws-keys.json
 
 # csvFiles
 pgDb/csvFile/productDetail.csv
+pgDb/csvFile/pgProductDetail.csv
 cassandraDb/csvFile/cassandaProductDetail.csv

@@ -2,8 +2,8 @@
 const faker = require('faker');
 const fs = require('fs');
 
-const writeUsers = fs.createWriteStream('cassandraProductDetail.csv');
-writeUsers.write('productId ,sellerId, sellerName, averageReviewScore, numberReviews, itemName, badge, itemPrice, freeShipping, productOptions, personalization, availableQuantity, onOrder\n', 'utf8');
+const writeUsers = fs.createWriteStream('pgProductDetail.csv');
+// writeUsers.write('productId ,sellerId, sellerName, averageReviewScore, numberReviews, itemName, badge, itemPrice, freeShipping, productOptions, personalization, availableQuantity, onOrder\n', 'utf8');
 
 function writeProducts(writer, encoding, callback) {
   let i = 10000000;
@@ -24,12 +24,13 @@ function writeProducts(writer, encoding, callback) {
       let freeShipping = faker.random.boolean();
       let optionName = faker.lorem.word();
       let choice = faker.lorem.word();
-      let productOptions = faker.lorem.word()
+      let adjustedPrice = faker.finance.amount(5, 1000, 2);
+      let productOptions = JSON.stringify([{optionName, choices: [{choice, adjustedPrice }]}]);
       let personalization = faker.random.boolean();
       let availableQuantity = faker.random.number();
       let onOrder = faker.random.number();
 
-      const data = `${productId}, ${sellerId}, ${sellerName}, ${averageReviewScore}, ${numberReviews}, ${itemName}, ${badge}, ${itemPrice}, ${freeShipping}, ${productOptions}, ${personalization}, ${availableQuantity}, ${onOrder} \n`;
+      const data = `${productId}, ${sellerId}, ${sellerName}, ${averageReviewScore}, ${numberReviews}, ${itemName}, ${badge}, ${itemPrice}, ${freeShipping}, "${productOptions}", ${personalization}, ${availableQuantity}, ${onOrder} \n`;
 
       if ( i === 0) {
         // i has reached 0, so write the data invoke writeUsers.end()

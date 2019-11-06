@@ -10,7 +10,6 @@ const pool = new Pool({
 });
 
 const file = path.join(__dirname, '/csvFile/pgProductDetail.csv');
-// console.log(file);
 
 pool.connect()
   .then(() => console.log('Ready to insert'))
