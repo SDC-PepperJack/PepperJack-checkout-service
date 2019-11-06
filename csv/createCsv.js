@@ -6,7 +6,7 @@ const writeUsers = fs.createWriteStream('cassandraProductDetail.csv');
 writeUsers.write('productId ,sellerId, sellerName, averageReviewScore, numberReviews, itemName, badge, itemPrice, freeShipping, productOptions, personalization, availableQuantity, onOrder\n', 'utf8');
 
 function writeProducts(writer, encoding, callback) {
-  let i = 1000000;
+  let i = 10000000;
   let id = 0;
   function write() {
     let ok = true;
