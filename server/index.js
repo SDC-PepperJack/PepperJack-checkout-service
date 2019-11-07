@@ -1,7 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const Model = require('./models.js');
-
+const Postgres = require('./pgQuery.js');
 const PORT = 1234;
 
 const app = express();
@@ -19,52 +19,79 @@ app.use((req, res, next) => {
 
 app.get('/api/checkout/:productId/details', (req, res) => {
   const { productId } = req.params;
-  Model.getProduct(productId)
-    .then((product) => res.json(product))
+  // Model.getProduct(productId)
+  //   .then((product) => res.json(product))
+  //   .catch(() => {
+  //     res.status(404);
+  //     res.send('Product not found');
+  //   });
+
+  Postgres.getProduct(productId)
+    .then((product) =>  res.json(product.rows))
     .catch(() => {
       res.status(404);
       res.send('Product not found');
-    });
+    })
 });
 
 app.post('/api/checkout/:productId/details', (req, res) => {
-  const { productId } = req.params;
-  const {sellerId, sellerName, averageReviewScore, numberReviews, itemName, badge, itemPrice, freeShipping, productOptions, personalization, availableQuantity, onOrder } = req.body;
+  const {productId, sellerId, sellerName, averageReviewScore, numberReviews, itemName, badge, itemPrice, freeShipping, productOptions, personalization, availableQuantity, onOrder } = req.body;
+  // var productOptions = JSON.stringify(productOptions);
+  // Model.insertProduct(productId, sellerId, sellerName, averageReviewScore, numberReviews, itemName, badge, itemPrice, freeShipping, productOptions, personalization, availableQuantity, onOrder, (err, results) => {
+  //   if (err) {
+  //     res.status(404);
+  //     res.send('Error adding new product');
+  //   } else {
+  //     res.send('Successful addition of new product');
+  //   }
+  // });
 
-  Model.insertProduct(productId, sellerId, sellerName, averageReviewScore, numberReviews, itemName, badge, itemPrice, freeShipping, productOptions, personalization, availableQuantity, onOrder, (err, results) => {
+  Postgres.insertProduct(productId, sellerId, sellerName, averageReviewScore, numberReviews, itemName, badge, itemPrice, freeShipping, productOptions, personalization, availableQuantity, onOrder, (err, result) => {
     if (err) {
       res.status(404);
-      res.send('Error adding new product');
+      res.send("Error adding new product");
     } else {
       res.send('Successful addition of new product');
     }
-  });
+  })
 });
 
 app.put('/api/checkout/:productId/details', (req, res) => {
-  const { productId } = req.params;
-  const updateDetail = req.body;
-
-  Model.updateProduct(productId, updateDetail, (err, results) => {
+  const { productId, freeShipping } = req.body;
+  // Model.updateProduct(productId, updateDetail, (err, results) => {
+  //   if (err) {
+  //     res.status(404);
+  //     res.send('Error updating product');
+  //   } else {
+  //     res.send(results);
+  //   }
+  // });
+  Postgres.updateProduct(productId, freeShipping, (err, results) => {
     if (err) {
       res.status(404);
-      res.send('Error updating product');
     } else {
-      res.send(results);
+      res.send('Successful update');
     }
-  });
+  })
 });
 
 app.delete('/api/checkout/:productId/details', (req, res) => {
-  const { productId } = req.params;
-  Model.deleteProduct(productId, (err, results) => {
+  const { productId } = req.body;
+  // console.log(req.params);
+  // Model.deleteProduct(productId, (err, results) => {
+  //   if (err) {
+  //     res.status(404);
+  //   } else {
+  //     res.send('Successful deletion');
+  //   }
+  // });
+  Postgres.deleteProduct(productId, (err, results) => {
     if (err) {
       res.status(404);
-      res.send('Error deleting product');
     } else {
-      res.send('Successful deletion');
+      res.send('Delete successful');
     }
-  });
+  })
 });
 
 

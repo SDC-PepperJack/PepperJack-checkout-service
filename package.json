@@ -8,7 +8,7 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "start": "node server/index.js",
+    "start": "nodemon server/index.js",
     "build": "webpack",
     "seed-db": "node --max_old_space_size=12288 csv/createCsv.js",
     "start-dev": "nodemon server/index.js --watch",
@@ -50,7 +50,7 @@
     "grunt": "^1.0.4",
     "grunt-aws-s3": "^2.0.1",
     "jest": "^24.9.0",
-    "nodemon": "^1.19.3",
+    "nodemon": "^1.19.4",
     "react-test-renderer": "^16.10.2",
     "style-loader": "^1.0.0",
     "webpack": "^4.41.0",
