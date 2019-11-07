@@ -76,7 +76,7 @@ app.put('/api/checkout/:productId/details', (req, res) => {
 });
 
 app.delete('/api/checkout/:productId/details', (req, res) => {
-  const { productId } = req.body;
+  const { productId } = req.params;
   // console.log(req.params);
   // Model.deleteProduct(productId, (err, results) => {
   //   if (err) {
