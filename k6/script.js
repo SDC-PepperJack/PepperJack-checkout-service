@@ -2,11 +2,11 @@ import http from "k6/http";
 import { sleep } from "k6";
 
 // GET Request
-// export default function() {
-//   var i = Math.floor(Math.random() * 10000000);
-//   http.get(`http://localhost:1234/api/checkout/${i}/details`);
-//   sleep(0);
-// }
+export default function() {
+  var i = Math.floor(Math.random() * 10000000);
+  http.get(`http://localhost:1234/api/checkout/${i}/details`);
+  sleep(0);
+}
 
 // POST Request
 export default function() {
