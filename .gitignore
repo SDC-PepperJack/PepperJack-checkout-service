@@ -30,7 +30,7 @@ dist/
 aws-keys.json
 
 # csvFiles
-pgDb/csvFile/pgProductDetail.csv
+pgDb/csvFile/
 cassandraDb/csvFile/cassandaProductDetail.csv
 
 # newrelic
