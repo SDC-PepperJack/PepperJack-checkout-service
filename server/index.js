@@ -3,7 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const Model = require('./models.js');
 const Postgres = require('./pgQuery.js');
-const PORT = 1234;
+const PORT = process.env.PORT || 1234;
 
 const app = express();
 
@@ -20,6 +20,7 @@ app.use((req, res, next) => {
 
 app.get('/api/checkout/:productId/details', (req, res) => {
   const { productId } = req.params;
+  // productId = 1;
   // Model.getProduct(productId)
   //   .then((product) => res.json(product))
   //   .catch(() => {
