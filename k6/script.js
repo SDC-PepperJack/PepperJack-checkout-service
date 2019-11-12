@@ -2,17 +2,16 @@ import http from "k6/http";
 import { sleep } from "k6";
 
 export let options = {
-  duration: "1000s",
-  rps: 100,
-  vus: 500
+  duration: "120s",
+  vus: 100
 }
 
 
 // GET Request
 export default function() {
-  var i = Math.floor(Math.random() * 10000000);
-  http.get(`http://localhost:1234/api/checkout/${i}/details`);
-  sleep(0.2);
+  http.get(`http://localhost:1234/api/checkout/732/details`);
+  sleep(0.1);
+
 }
 
 // POST Request
