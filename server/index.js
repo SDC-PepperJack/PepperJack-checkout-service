@@ -1,7 +1,7 @@
 require('newrelic');
 const express = require('express');
 const morgan = require('morgan');
-const Model = require('./models.js');
+// const Model = require('./models.js');
 const Postgres = require('./pgQuery.js');
 const PORT = process.env.PORT || 1234;
 
