@@ -37,10 +37,12 @@ function writeProducts(writer, encoding, callback) {
       let itemPrice = dataGenerator.generateItemPrice(10, 301);
       let badge = getBadge();
       let freeShipping = dataGenerator.generateBoolean();
-      let availableQuantity = dataGenerator.generateAvailableQuantity();
       let productOptions = JSON.stringify([{optionName: getOptionName(), choices: getChoices()}])
+      let personalization = dataGenerator.generateBoolean();
+      let availableQuantity = dataGenerator.generateAvailableQuantity();
+      let onOrder = faker.random.number();
 
-      const data = `${productId}, ${sellerId}, ${sellerName}, ${averageReviewScore}, ${numberReviews}, ${itemName}, ${itemPrice},${badge}, ${freeShipping}, ${availableQuantity}, "${productOptions}"\n`;
+      const data = `${productId}, ${sellerId}, ${sellerName}, ${averageReviewScore}, ${numberReviews}, ${itemName}, ${itemPrice},${badge}, ${freeShipping}, "${productOptions}", ${personalization}, ${availableQuantity},${onOrder}\n`;
 
       if ( i === 0) {
         // i has reached 0, so write the data invoke writeUsers.end()
