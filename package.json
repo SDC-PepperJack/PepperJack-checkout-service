@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "nodemon server/index.js",
-    "build": "webpack -d --watch",
+    "build": "webpack --mode development",
     "seed-db": "node --max_old_space_size=12288 csv/createCsv.js",
     "start-dev": "nodemon server/index.js --watch",
     "test": "jest"
