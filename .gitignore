@@ -32,6 +32,7 @@ aws-keys.json
 # csvFiles
 pgDb/csvFile/
 cassandraDb/csvFile/cassandaProductDetail.csv
+pgProductDetail.csv
 
 # newrelic
 newrelic.js
