@@ -13,7 +13,11 @@ const pool = new Pool({
 // const fileProduct = path.join(__dirname + '/csvFile/pgProductDetail.csv');
 
 // FOR EC2
-const fileProduct = path.join(__dirname, '/pgProductDetail.csv');
+const fileProduct = '/Users/briankim/Desktop/SDC/BTetsy-checkout-service/pgProductDetail.csv'
+// console.log(__dirname);
+// console.log(fileProduct);
+
+
 const fileSizes = path.join(__dirname, '/csvFile/pgProductSizes.csv');
 const fileMaterials = path.join(__dirname, '/csvFile/pgProductMaterials.csv');
 const filePatterns = path.join(__dirname, '/csvFile/pgProductPatterns.csv');
