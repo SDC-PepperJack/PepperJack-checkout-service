@@ -13,7 +13,7 @@ const pool = new Pool({
 // const fileProduct = path.join(__dirname + '/csvFile/pgProductDetail.csv');
 
 // FOR EC2
-const fileProduct = '/Users/briankim/Desktop/SDC/BTetsy-checkout-service/pgProductDetail.csv'
+const fileProduct = '/var/lib/postgresql/Pepperjack-checkout-service/pgProductDetail.csv';
 // console.log(__dirname);
 // console.log(fileProduct);
 
