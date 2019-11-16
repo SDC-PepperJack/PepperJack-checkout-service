@@ -6,7 +6,7 @@ const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'btetsy',
-  password: '',
+  password: '5896',
 });
 
 // const fileProduct = path.join(__dirname + '/csvFile/testProductDetail.csv');
