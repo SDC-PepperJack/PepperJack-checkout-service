@@ -9,8 +9,11 @@ const pool = new Pool({
   password: '5896',
 });
 
-// const fileProduct = path.join(__dirname + '/csvFile/testProductDetail.csv');
-const fileProduct = path.join(__dirname, '/csvFile/pgProductDetail.csv');
+// WITHOUT EC2
+// const fileProduct = path.join(__dirname + '/csvFile/pgProductDetail.csv');
+
+// FOR EC2
+const fileProduct = path.join(__dirname, '/pgProductDetail.csv');
 const fileSizes = path.join(__dirname, '/csvFile/pgProductSizes.csv');
 const fileMaterials = path.join(__dirname, '/csvFile/pgProductMaterials.csv');
 const filePatterns = path.join(__dirname, '/csvFile/pgProductPatterns.csv');
