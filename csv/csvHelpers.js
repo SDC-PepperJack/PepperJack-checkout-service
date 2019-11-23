@@ -2,7 +2,6 @@ const dataSources = require('./csvData.js');
 
 class dataGenerator {
   constructor() {
-    // defining valid inputs to pull fake data from
     this.sellerNames = dataSources.sellerNames;
     this.productNames = dataSources.productNames;
     this.badges = ['Bestseller', 'Badseller', null];

@@ -29,3 +29,4 @@ pool.connect()
   .then(() => console.log('Table created'));
 
 // CREATE UNIQUE INDEX ON productId
+

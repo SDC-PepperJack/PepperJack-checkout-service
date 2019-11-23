@@ -30,8 +30,6 @@ class ProductDetailsModel {
   };
 
   updateProduct(inputId, updateDetail, cb) {
-    // switch from findOneAndUpdate to updateOne to save some time
-      // because findOneAndUpdate returns a document, while updateOne just returns the id
     this.model.updateOne({productId: inputId}, updateDetail, (err, result) => {
       if (err) {
         cb(err, null);

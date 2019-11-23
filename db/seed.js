@@ -5,7 +5,6 @@ const dataSources = require('./fakeDataSources.js');
 
 class dataGenerator {
   constructor() {
-    // defining valid inputs to pull fake data from
     this.sellerNames = dataSources.sellerNames;
     this.productNames = dataSources.productNames;
     this.badges = ['Bestseller', 'Badseller', null];
@@ -14,7 +13,6 @@ class dataGenerator {
 
   generateProduct() {
     let product = {
-      // productId: this.generateProductId(),
       sellerId: this.generateSellerId(),
       sellerName: this.generateSellerName(),
       averageReviewScore: this.generateAverageReviewScore(),
@@ -31,7 +29,7 @@ class dataGenerator {
     return product;
   }
 
-  getRandomInt(lowerLimit, upperLimit) { // returns integer between lower limit and upper limit - 1
+  getRandomInt(lowerLimit, upperLimit) {
     return Math.floor(Math.random() * (upperLimit - lowerLimit) + lowerLimit);
   }
 
@@ -106,7 +104,6 @@ class dataGenerator {
   }
 }
 
-// generate products to populate db
 let generator = new dataGenerator();
 let products = [];
 let product;

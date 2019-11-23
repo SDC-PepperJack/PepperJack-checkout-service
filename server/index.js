@@ -1,7 +1,6 @@
 require('newrelic');
 const express = require('express');
 const morgan = require('morgan');
-// const Model = require('./models.js');
 const Postgres = require('./pgQuery.js');
 const PORT = process.env.PORT || 1234;
 
@@ -20,13 +19,6 @@ app.use((req, res, next) => {
 
 app.get('/api/checkout/:productId/details', (req, res) => {
   const { productId } = req.params;
-  // productId = 1;
-  // Model.getProduct(productId)
-  //   .then((product) => res.json(product))
-  //   .catch(() => {
-  //     res.status(404);
-  //     res.send('Product not found');
-  //   });
 
   Postgres.getProduct(productId)
     .then((product) =>  res.json(product.rows))
@@ -39,15 +31,6 @@ app.get('/api/checkout/:productId/details', (req, res) => {
 app.post('/api/checkout/:productId/details', (req, res) => {
   const { productId } = req.params;
   const { sellerId, sellerName, averageReviewScore, numberReviews, itemName, badge, itemPrice, freeShipping, productOptions, personalization, availableQuantity, onOrder } = req.body;
-  // var productOptions = JSON.stringify(productOptions);
-  // Model.insertProduct(productId, sellerId, sellerName, averageReviewScore, numberReviews, itemName, badge, itemPrice, freeShipping, productOptions, personalization, availableQuantity, onOrder, (err, results) => {
-  //   if (err) {
-  //     res.status(404);
-  //     res.send('Error adding new product');
-  //   } else {
-  //     res.send('Successful addition of new product');
-  //   }
-  // });
 
   Postgres.insertProduct(productId, sellerId, sellerName, averageReviewScore, numberReviews, itemName, badge, itemPrice, freeShipping, productOptions, personalization, availableQuantity, onOrder, (err, result) => {
     if (err) {
@@ -61,14 +44,6 @@ app.post('/api/checkout/:productId/details', (req, res) => {
 
 app.put('/api/checkout/:productId/details', (req, res) => {
   const { productId, freeShipping } = req.body;
-  // Model.updateProduct(productId, updateDetail, (err, results) => {
-  //   if (err) {
-  //     res.status(404);
-  //     res.send('Error updating product');
-  //   } else {
-  //     res.send(results);
-  //   }
-  // });
   Postgres.updateProduct(productId, freeShipping, (err, results) => {
     if (err) {
       res.status(404);
@@ -80,14 +55,6 @@ app.put('/api/checkout/:productId/details', (req, res) => {
 
 app.delete('/api/checkout/:productId/details', (req, res) => {
   const { productId } = req.params;
-  // console.log(req.params);
-  // Model.deleteProduct(productId, (err, results) => {
-  //   if (err) {
-  //     res.status(404);
-  //   } else {
-  //     res.send('Successful deletion');
-  //   }
-  // });
   Postgres.deleteProduct(productId, (err, results) => {
     if (err) {
       res.status(404);

@@ -1,13 +1,13 @@
-// import Enzyme from 'enzyme';
-// import Adapter from 'enzyme-adapter-react-16';
-// Enzyme.configure({adapter: new Adapter()});
-// import React from 'react';
-// // import SellerInfo from '../client/sellerInfo.js';
-// import ItemName from '../client/ItemName.js';
-// import Badge from '../client/badge.js';
-// import ItemPrice from '../client/itemPrice.js';
-// import FreeShipping from '../client/freeShipping.js';
-// import OnOrderAvailable from '../client/onOrderAvailable.js';
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+Enzyme.configure({adapter: new Adapter()});
+import React from 'react';
+import SellerInfo from '../client/sellerInfo.js';
+import ItemName from '../client/ItemName.js';
+import Badge from '../client/badge.js';
+import ItemPrice from '../client/itemPrice.js';
+import FreeShipping from '../client/freeShipping.js';
+import OnOrderAvailable from '../client/onOrderAvailable.js';
 
 xdescribe('<SellerInfo />', () => {
   test('It renders a seller name based on prop', () => {

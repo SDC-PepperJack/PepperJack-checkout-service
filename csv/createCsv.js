@@ -1,104 +1,107 @@
 const fs = require('fs');
 var dataGenerator = require('./csvHelpers.js');
 const faker = require('faker');
-const writeUsers = fs.createWriteStream('pgProductDetail.csv');
-// const writeUsers = fs.createWriteStream('testProductDetail.csv');
 dataGenerator = new dataGenerator();
 
-function writeProducts(writer, encoding, callback) {
-  function getBadge() {
-    var badges = ['Bestseller', 'Badseller', null];
-    return badges[Math.floor(Math.random() * badges.length)];
-  }
-  function getChoices() {
-    var choices = ['extra_small', 'small', 'medium', 'large', 'extra_large', 'ash', 'walnut', 'ebony', 'aluminum', 'brushed_steel', 'glass', 'solid_titanium', 'pure_gold','solid_diamond', 'checkerboard', 'argile', 'striped_vertical', 'striped_horizontal', 'stars', 'bars', 'tie_dye', 'serif', 'comic_sans', 'typewriter', 'cursive', 'star_wars'];
+// const writeUsers = fs.createWriteStream('pgProductDetail.csv');
+// function writeProducts(writer, encoding, callback) {
+//   let i = 10000000;
+//   let id = 0;
 
-    return choices[Math.floor(Math.random() * choices.length)];
-  }
+//   function write() {
+//     let ok = true;
+//     do {
+//       i -= 1;
+//       id += 1;
+//       let tableid = id;
+//       let productId = id;
+//       let sellerId = dataGenerator.generateSellerId();
+//       let sellerName = dataGenerator.generateSellerName();
+//       let averageReviewScore = dataGenerator.generateAverageReviewScore();
+//       let numberReviews = dataGenerator.generateNumReviews();
+//       let itemName = faker.lorem.word();
+//       let freeShipping = dataGenerator.generateBoolean();
+//       let personalization = dataGenerator.generateBoolean();
+//       let availableQuantity = dataGenerator.generateAvailableQuantity();
+//       let onOrder = faker.random.number();
+//       let itemPrice = faker.finance.amount(5, 100, 2);
 
-  function getOptionName() {
-    var options = ['Size', 'Material', 'Pattern', 'Font_Design'];
-    return options[Math.floor(Math.random() * options.length)];
-  }
+//       const data = `${tableid},${productId},${sellerId},${sellerName},${averageReviewScore},${numberReviews},${itemName},${freeShipping},${personalization}, ${availableQuantity}, ${onOrder}, ${itemPrice}\n`;
 
-  let i = 10000000;
-  let id = 0;
-  function write() {
-    let ok = true;
-    do {
-      i -= 1;
-      id += 1;
-      let productId = id;
-      let sellerId = dataGenerator.generateSellerId();
-      let sellerName = dataGenerator.generateSellerName();
-      let averageReviewScore = dataGenerator.generateAverageReviewScore();
-      let numberReviews = dataGenerator.generateNumReviews();
-      let itemName = faker.lorem.word();
-      let itemPrice = dataGenerator.generateItemPrice(10, 301);
-      let badge = getBadge();
-      let freeShipping = dataGenerator.generateBoolean();
-      let productOptions = JSON.stringify([{optionName: getOptionName(), choices: getChoices()}])
-      let personalization = dataGenerator.generateBoolean();
-      let availableQuantity = dataGenerator.generateAvailableQuantity();
-      let onOrder = faker.random.number();
+//       if (i === 0) {
+//         writer.write(data, encoding, callback);
+//       } else {
+//         ok = writer.write(data, encoding);
+//       }
+//     } while (i > 0 && ok);
+//     if (i > 0) {
+//       writer.once('drain', write);
+//     }
+//   }
+//   write();
+// }
 
-      const data = `${productId}, ${sellerId}, ${sellerName}, ${averageReviewScore}, ${numberReviews}, ${itemName}, ${itemPrice},${badge}, ${freeShipping}, "${productOptions}", ${personalization}, ${availableQuantity},${onOrder}\n`;
+// writeProducts(writeUsers, 'utf-8', () => {
+//   writeUsers.end();
+// });
 
-      if ( i === 0) {
-        // i has reached 0, so write the data invoke writeUsers.end()
-        writer.write(data, encoding, callback);
-      } else {
-        // i hasn't reached 0 yet, so write the data and continue
-        // don't pass in the callback
-        ok = writer.write(data, encoding);
-      }
-    } while (i > 0 && ok);
-    if (i >0) {
-      // pauses the write process when buffer is full
-      // once drain is fired, process continues until all records have been written
-        // drain event is for when a writable stream's internal buffer has been emptied
-          // when highWaterMark prop (max bytes of data that can be stored inside internal buffer) is exceeded
-      writer.once('drain', write);
-    }
-  }
-  write();
-}
+// BADGES CSV
+// let badges = ["Bestseller", "Badseller", null];
+// const writeUsers = fs.createWriteStream('pgProductBadges.csv');
+// function writeBadges(writer, encoding, callback) {
+//   let i = 10000001;
+//   let id = 0;
 
-writeProducts(writeUsers, 'utf-8', () => {
-  writeUsers.end();
-});
+//   function write() {
+//     let ok = true;
+//     do {
+//       i -= 1;
+//       id += 1;
+//       for (var j = 1; j <= badges.length; j++) {
+//         let data = `${id},${i},${badges[j]}\n`;
+//         if (i === 1) {
+//           writer.write(data, encoding, callback);
+//         } else {
+//           ok = writer.write(data, encoding);
+//         }
+//       }
+//     } while (i > 1 && ok);
+//     if ( i > 1) {
+//       writer.once('drain', write);
+//     }
+//   }
+//   write();
+// }
+
+// writeBadges(writeUsers, 'utf-8', () => {
+//   writeUsers.end();
+// })
+
 
 // SIZES CSV
-// let sizes = ["extra-small", "small", "medium", "large", "extra_large"];
+// let sizes = ["extra_small", "small", "medium", "large", "extra_large"];
 // const writeUsers = fs.createWriteStream('pgProductSizes.csv');
 // function writeSizes(writer, encoding, callback) {
-//   let i = 10000000;
+//   let i = 10000001;
 //   let id = 0;
 //   function write() {
 //     let ok = true;
 //     do {
 //       i -= 1;
 //       id += 1; // size id
-//       for (var j = 0; j < sizes.length; j++) {
-//         let data = `${id}, ${j}\n`;
+//       for (var j = 1; j <= sizes.length; j++) {
+//         let data = `${id},${i},${sizes[j]}\n`;
 
-//         if ( i === 0) {
-//           // i has reached 0, so write the data invoke writeUsers.end()
+//         if ( i === 1) {
 //           writer.write(data, encoding, callback);
 //         } else {
-//           // i hasn't reached 0 yet, so write the data and continue
-//           // don't pass in the callback
 //           ok = writer.write(data, encoding);
 //         }
 
 //       }
 
-//     } while (i > 0 && ok);
-//     if (i >0) {
-//       // pauses the write process when buffer is full
-//       // once drain is fired, process continues until all records have been written
-//         // drain event is for when a writable stream's internal buffer has been emptied
-//           // when highWaterMark prop (max bytes of data that can be stored inside internal buffer) is exceeded
+//     } while (i > 1 && ok);
+//     if (i >1) {
 //       writer.once('drain', write);
 //     }
 //   }
@@ -113,23 +116,23 @@ writeProducts(writeUsers, 'utf-8', () => {
 // const writeUsers = fs.createWriteStream('pgProductMaterials.csv');
 // let materials = ['ash', 'walnut', 'ebony', 'aluminum', 'brushed_steel', 'glass', 'solid_titanium', 'pure_gold', 'solid_diamond'];
 // function writeMaterials(writer, encoding, callback) {
-//   let i = 10000000;
+//   let i = 10000001;
 //   let id = 0;
 //   function write() {
 //     let ok = true;
 //     do {
 //       i -= 1;
 //       id += 1;
-//       for (var j = 0; j < materials.length; j++) {
-//         let data = `${id}, ${j}\n`;
-//           if ( i === 0) {
+//       for (var j = 1; j < materials.length; j++) {
+//         let data = `${id},${i},${materials[j]}\n`;
+//           if ( i === 1) {
 //             writer.write(data, encoding, callback);
 //           } else {
 //             ok = writer.write(data, encoding);
 //           }
 //       }
-//     } while (i > 0 && ok);
-//     if (i >0) {
+//     } while (i > 1 && ok);
+//     if (i >1) {
 //       writer.once('drain', write);
 //     }
 //   }
@@ -144,24 +147,24 @@ writeProducts(writeUsers, 'utf-8', () => {
 // let patterns = ['checkboard', 'argile', 'striped_vertical', 'striped_horizontal', 'stars', 'bars', 'tie_dye'];
 // const writeUsers = fs.createWriteStream('pgProductPatterns.csv');
 // function writePatterns(writer, encoding, callback) {
-//   let i = 10000000;
+//   let i = 10000001;
 //   let id = 0;
 //   function write() {
 //     let ok = true;
 //     do {
 //       i -= 1;
 //       id += 1;
-//       for (var j = 0; j < patterns.length; j++) {
-//         let data = `${id}, ${j}\n`;
-//         if ( i === 0) {
+//       for (var j = 1; j < patterns.length; j++) {
+//         let data = `${id}, ${i}, ${patterns[j]}\n`;
+//         if ( i === 1) {
 //           writer.write(data, encoding, callback);
 //         } else {
 //           ok = writer.write(data, encoding);
 //         }
 //       }
 
-//     } while (i > 0 && ok);
-//     if (i >0) {
+//     } while (i > 1 && ok);
+//     if (i >1) {
 //       writer.once('drain', write);
 //     }
 //   }
@@ -172,67 +175,34 @@ writeProducts(writeUsers, 'utf-8', () => {
 //   writeUsers.end();
 // });
 
-// // FONTS
-// let fonts = ['serif', 'comic_sans', 'typewriter', 'cursive', 'star_wars'];
-// const writeUsers = fs.createWriteStream('pgProductFonts.csv');
-// function writeFonts(writer, encoding, callback) {
-//   let i = 10000000;
-//   let id = 0;
-//   function write() {
-//     let ok = true;
-//     do {
-//       i -= 1;
-//       id += 1;
-//       for (var j = 0; j < fonts.length; j++) {
-//         let data = `${id}, ${j}\n`;
-//         if ( i === 0) {
-//           writer.write(data, encoding, callback);
-//         } else {
-//           ok = writer.write(data, encoding);
-//         }
-//       }
+// FONTS
+let fonts = ['serif', 'comic_sans', 'typewriter', 'cursive', 'star_wars'];
+const writeUsers = fs.createWriteStream('pgProductFonts.csv');
+function writeFonts(writer, encoding, callback) {
+  let i = 10000001;
+  let id = 0;
+  function write() {
+    let ok = true;
+    do {
+      i -= 1;
+      id += 1;
+      for (var j = 1; j < fonts.length; j++) {
+        let data = `${id}, ${i},${fonts[j]}\n`;
+        if ( i === 1) {
+          writer.write(data, encoding, callback);
+        } else {
+          ok = writer.write(data, encoding);
+        }
+      }
 
-//     } while (i > 0 && ok);
-//     if (i >0) {
-//       writer.once('drain', write);
-//     }
-//   }
-//   write();
-// }
+    } while (i > 1 && ok);
+    if (i >1) {
+      writer.once('drain', write);
+    }
+  }
+  write();
+}
 
-// writeFonts(writeUsers, 'utf-8', () => {
-//   writeUsers.end();
-// });
-
-// BADGES
-// let badges = ['Bestseller','Badseller', null];
-// const writeUsers = fs.createWriteStream('pgProductBadges.csv');
-// function writeBadges(writer, encoding, callback) {
-//   let i = 10000000;
-//   let id = 0;
-//   function write() {
-//     let ok = true;
-//     do {
-//       i -= 1;
-//       id += 1;
-//       for (var j = 0; j < badges.length; j++) {
-//         let data = `${id}, ${j}\n`;
-//         if ( i === 0) {
-//           writer.write(data, encoding, callback);
-//         } else {
-//           ok = writer.write(data, encoding);
-//         }
-//       }
-
-//     } while (i > 0 && ok);
-//     if (i >0) {
-//       writer.once('drain', write);
-//     }
-//   }
-//   write();
-// }
-
-// writeBadges(writeUsers, 'utf-8', () => {
-//   writeUsers.end();
-// });
-
+writeFonts(writeUsers, 'utf-8', () => {
+  writeUsers.end();
+});
