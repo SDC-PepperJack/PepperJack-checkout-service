@@ -10,7 +10,7 @@ const pool = new Pool({
 });
 
 
-// const fileProduct = path.join(__dirname + '/csvFile/pgProductDetail.csv');
+const fileProduct = path.join(__dirname + '/csvFile/pgProductDetail.csv');
 const fileSizes = path.join(__dirname, '/csvFile/pgProductSizes.csv');
 const fileMaterials = path.join(__dirname, '/csvFile/pgProductMaterials.csv');
 const fileBadges = path.join(__dirname, '/csvFile/pgProductBadges.csv');
@@ -20,8 +20,8 @@ const fileFonts = path.join(__dirname, '/csvFile/pgProductFonts.csv');
 
 pool.connect()
   .then(() => console.log('Ready to insert'))
-  // .then(() => pool.query(`COPY productdetails FROM '${fileProduct}' CSV`))
-  // .then(() => pool.query(`COPY badge FROM '${fileBadges}' CSV`))
+  .then(() => pool.query(`COPY productdetails FROM '${fileProduct}' CSV`))
+  .then(() => pool.query(`COPY badge FROM '${fileBadges}' CSV`))
   .then(() => pool.query(`COPY size FROM '${fileSizes}' CSV`))
   .then(() => pool.query(`COPY material FROM '${fileMaterials}' CSV`))
   .then(() => pool.query(`COPY font FROM '${fileFonts}' CSV`))
