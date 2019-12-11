@@ -8,16 +8,17 @@ const pool = new Pool({
 });
 
 module.exports = {
-  getProduct(productId) {
-    let productData = pool.query(`SELECT * FROM productdetails WHERE productid=${productId}`);
-    if (!productData) {
-      throw new Error('product not found');
-    }
-    return productData;
+  getProduct(productId, req, res) {
+    let productData = pool.query(`SELECT productdetails.*, badge.badges, size.sizes, material.materials, pattern.patterns, font.fonts FROM productdetails INNER JOIN badge ON productdetails.id = badge.product_id INNER JOIN size ON productdetails.id = size.product_id INNER JOIN material ON productdetails.id = material.product_id INNER JOIN pattern ON productdetails.id = pattern.product_id INNER JOIN font ON productdetails.id = font.product_id WHERE productdetails.productid = $1`, [productId], (err, results) => {
+      if (err) {
+        throw err;
+      }
+      res.json(results.rows);
+    })
   },
 
-  insertProduct(productId, sellerId, sellerName, averageReviewScore, numberReviews, itemName, badge, itemPrice, freeShipping, productOptions, personalization, availableQuantity, onOrder, cb) {
-    pool.query('INSERT INTO productdetails (productId, sellerId, sellerName, averageReviewScore, numberReviews, itemName, badge, itemPrice, freeShipping, productOptions, personalization, availableQuantity, onOrder) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)', [productId, sellerId, sellerName, averageReviewScore, numberReviews, itemName, badge, itemPrice, freeShipping, productOptions, personalization, availableQuantity], (err, result) => {
+  insertProduct(productId, sellerId, sellerName, averageReviewScore, numberReviews, itemName,  itemPrice, freeShipping, personalization, availableQuantity, onOrder, cb) {
+    pool.query('INSERT INTO productdetails (productId, sellerId, sellerName, averageReviewScore, numberReviews, itemName, itemPrice, freeShipping, personalization, availableQuantity, onOrder) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)', [productId, sellerId, sellerName, averageReviewScore, numberReviews, itemName, badge, itemPrice, freeShipping, productOptions, personalization, availableQuantity], (err, result) => {
       if (err) {
         throw new Error('Error adding new product');
       } else {
